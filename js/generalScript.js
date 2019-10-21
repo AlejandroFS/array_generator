@@ -1,4 +1,8 @@
-let button;
+import {
+    Matriz
+} from './matriz.js';
+
+
 document.addEventListener("DOMContentLoaded", function (event) {
 
     console.log("DOM fully loaded and parsed");
@@ -6,14 +10,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
         let secondColumn = document.getElementById("secondColumn");
         let valueOfInput = document.getElementById("inputNumericField").value;
         let result = checkValue(valueOfInput);
-        if (!result) { prompt("Add a numeric value"); }
-        else {
+        if (!result) {
+            prompt("Add a numeric value");
+        } else {
             let myMatriz = new Matriz(valueOfInput, 100, -100);
             myMatriz.fillArray();
             let oneDimensionTable = myMatriz.getOneDimensionalHtmlTable();
             secondColumn.removeChild(secondColumn.childNodes[0]);
             secondColumn.appendChild(oneDimensionTable);
-
+            writteArrayFormatonHtml(myMatriz.getArrayOneDimension());
         }
     });
 
@@ -23,48 +28,25 @@ function checkValue(value) {
     return Number.isInteger(parseInt(value)) && value > 0;
 }
 
-class Matriz {
-    constructor(elementOfArray, positiveLimit, negativeLimit) {
-        this.__elementOfArray = parseInt(elementOfArray);
-        this.__positiveLimit = positiveLimit;
-        this.__negativeLimit = negativeLimit;
-        this.matriz = [];
-    }
+function writteArrayFormatonHtml(values, language = "Javascript", variableName = "myArray") {
 
-    fillArray() {
+    let jsValue = `${language}:  let ${variableName} = [`;
+    for (const index in values) {
+        if (index == values.length - 1) {
+            jsValue += values[index] + "];";
+        } else {
 
-        for (let index = 0; index < this.__elementOfArray; index++) {
-            if (Math.random() > 0.5) {
-                const randomNumber = Math.floor(Math.random() * this.__negativeLimit);
-                this.matriz[index] = randomNumber;
-            } else {
-                const randomNumber = Math.floor(Math.random() * this.__positiveLimit);
-                this.matriz[index] = randomNumber;
-            }
+            jsValue += values[index] + ", ";
         }
-
     }
-    printArray() {
-        console.log(this.matriz);
+    var para = document.createElement("li");
+    var node = document.createTextNode(jsValue);
+    para.appendChild(node);
+    let ulList = document.getElementById("langagueCode");
+    if (ulList.childNodes.length > 0) {
+        ulList.removeChild(ulList.childNodes[0]);
+        ulList.appendChild(para);
+    } else {
+        ulList.appendChild(para);
     }
-
-    getArray() {
-        return this.matriz;
-    }
-    getOneDimensionalHtmlTable() {
-        let table = document.createElement("table");
-        let tr = document.createElement("tr");
-        for (const value of this.matriz) {
-            tr.appendChild
-            let td = document.createElement("td");
-            let textNode = document.createTextNode(value);
-            td.appendChild(textNode);
-            tr.appendChild(td);
-        }
-        table.appendChild(tr);
-        return table;
-    }
-    getTwoDimensionalHtmlTable() { }
 }
-
-
