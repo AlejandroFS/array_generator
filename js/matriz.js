@@ -5,9 +5,10 @@ export class Matriz {
         this.__positiveLimit = positiveLimit;
         this.__negativeLimit = negativeLimit;
         this.matriz = [];
+        this.fillOneDimensionArray();
     }
 
-    fillArray() {
+    fillOneDimensionArray() {
 
         for (let index = 0; index < this.__elementOfArray; index++) {
             if (Math.random() > 0.5) {
@@ -18,20 +19,16 @@ export class Matriz {
                 this.matriz[index] = randomNumber;
             }
         }
-
-    }
-    printArray() {
-        console.log(this.matriz);
     }
 
     getArrayOneDimension() {
         return this.matriz;
     }
-    printt(){
-        console.log("LLLL");
-    }
+
     getOneDimensionalHtmlTable() {
         let table = document.createElement("table");
+        let tableBody = document.createElement("tbody");
+        table.id = "tableOnDimension";
         let tr = document.createElement("tr");
         for (const value of this.matriz) {
             tr.appendChild
@@ -40,9 +37,10 @@ export class Matriz {
             td.appendChild(textNode);
             tr.appendChild(td);
         }
-        table.appendChild(tr);
+        table.appendChild(tableBody);
+        tableBody.appendChild(tr);
         return table;
     }
-    getTwoDimensionalHtmlTable() {}
+    getTwoDimensionalsHtmlTable() { }
 }
 

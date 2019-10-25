@@ -1,0 +1,24 @@
+#tableOnDimension {
+    table-layout: fixed;
+    display: block;
+    overflow-x: scroll;
+    white-space: nowrap;
+    width: 100%;
+}
+
+#tableOnDimension > tbody> tr > td {
+    position: relative;
+    text-align: center;
+    border: 1px solid #dddddd;
+    padding: 8px;
+    min-width: 75px;
+    height: 42px;
+}
+
+#tableOnDimension td  span{
+    border: 1px solid #dddddd;
+    color: red;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
