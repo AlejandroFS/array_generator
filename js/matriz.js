@@ -26,6 +26,7 @@ export class Matriz {
     }
 
     getOneDimensionalHtmlTable() {
+        let count = 0;
         let table = document.createElement("table");
         let tableBody = document.createElement("tbody");
         table.id = "tableOnDimension";
@@ -34,8 +35,16 @@ export class Matriz {
             tr.appendChild
             let td = document.createElement("td");
             let textNode = document.createTextNode(value);
+
+            let span = document.createElement("span");
+            let spanTextNode = document.createTextNode(count);
+
+
             td.appendChild(textNode);
+            span.appendChild(spanTextNode);
+            td.appendChild(span);
             tr.appendChild(td);
+            count++;
         }
         table.appendChild(tableBody);
         tableBody.appendChild(tr);
